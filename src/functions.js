@@ -13,5 +13,24 @@ function reverseString(str) {
   if (typeof str !== "string") return null;
   return str.split("").reverse().join("");
 }
+function Calculator() {
+  function add(a, b) {
+    if (typeof a !== "number" || typeof b !== "number") return NaN;
+    return a + b;
+  }
+  function subtract(a, b) {
+    if (typeof a !== "number" || typeof b !== "number") return NaN;
+    return a - b;
+  }
+  function multiply(a, b) {
+    if (typeof a !== "number" || typeof b !== "number") return NaN;
+    return a * b;
+  }
+  const divide = (a, b) => {
+    if (typeof a !== "number" || typeof b !== "number") return NaN;
+    return a / b;
+  };
+  return { add, subtract, multiply, divide };
+}
 
-export { sum, capitalize, reverseString };
+export { sum, capitalize, reverseString, Calculator };
