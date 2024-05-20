@@ -1,4 +1,4 @@
-import { capitalize, sum, reverseString } from "./functions";
+import { capitalize, sum, reverseString, Calculator } from "./functions";
 test("accept string only", () => {
   expect(capitalize(123)).toBeNull();
 });
@@ -21,22 +21,22 @@ test("reverse multiple word", () => {
 });
 //test for calculator methods for add,sub multiple and divide for two numbers
 //check input is number only, check the return value is correct
-test("check input is number only", () => {
-  expect(calculator().add("123")).toBeNull();
-  expect(calculator().subtract("123")).toBeNull();
-  expect(calculator().divide("123")).toBeNull();
-  expect(calculator().multiply("123")).toBeNull();
+test("check the input is number only", () => {
+  expect(Calculator().add("13", 5)).toBe(NaN);
+  expect(Calculator().subtract(4, "1")).toBe(NaN);
+  expect(Calculator().divide("123", "5")).toBe(NaN);
+  expect(Calculator().multiply("", 0)).toBe(NaN);
 });
 test("check result for addition method", () => {
-  expect(calculator().add(3, 6)).toEqual(9);
+  expect(Calculator().add(3, 6)).toEqual(9);
 });
 
 test("check result for subtract method", () => {
-  expect(calculator().add(8, 6)).toEqual(2);
+  expect(Calculator().subtract(8, 6)).toEqual(2);
 });
 test("check result for multiplication method", () => {
-  expect(calculator().add(4, 5)).toEqual(20);
+  expect(Calculator().multiply(4, 5)).toEqual(20);
 });
 test("check result for division method", () => {
-  expect(calculator().add(15, 3)).toEqual(5);
+  expect(Calculator().divide(15, 3)).toEqual(5);
 });
