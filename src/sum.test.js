@@ -1,11 +1,11 @@
-import { capitalize} from './functions'
-test('two plus two is four', () => {
-    expect(sum(2, 2)).toBe(4);
-  });
-//test for capitalize check the first letter for string
-//check it return string ,check the first letter is  capital 
-  test('accept string',() =>{
-    expect(capitalize('you').toBe(String))
+import { capitalize, sum } from "./functions";
 
-  });
-  
+test("accept string only", () => {
+  expect(capitalize(123)).toBe(null);
+});
+test("capitalize first letter", () => {
+  expect(capitalize("you")).toBe("You");
+});
+test("capitalize only the first word", () => {
+  expect(capitalize("hey, you")).toBe("Hey, you");
+});
