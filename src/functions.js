@@ -11,9 +11,7 @@ function capitalize(str) {
 
 function reverseString(str) {
   if (typeof str !== "string") return null;
-  let arr = [...str];
-  let result = arr.reverse().join("");
-  return result;
+  return str.split("").reverse().join("");
 }
 
 export { sum, capitalize, reverseString };
