@@ -77,16 +77,41 @@ function CesarCipher() {
   for (let i = 0; i < charSet.length; i++) {
     hashMap.set(i, charSet[i]);
   }
-
+  //
+  let reg = /^[a-zA-Z]*$/;
   function encrypt(str, index) {
-    let arr = [...str];
+    let allArr = [...str];
+    let arr = allArr;
+    let punctuation = new Map();
+    for (let i = 0; i < allArr.length; i++) {
+      if (reg.test(allArr[i]) === false) {
+        punctuation.set(allArr[i], allArr.indexOf(allArr[i]));
+      }
+    }
+    //
+
+    let upperCase = new Map();
+    for (let i = 0; i < allArr.length; i++) {
+      let regs = /[A-Z]/;
+      if (regs.test(allArr[i])) {
+        upperCase.set(i, allArr[i]);
+      }
+    }
+    //don't remove the capital letter before encrypt make it lower case instead
+    for (const key of upperCase) {
+      arr.splice(key[0], 0, key[1].toLowerCase());
+    }
+    //
     let result = [];
+
     for (let k = 0; k < arr.length; k++) {
       for (let j = 0; j < charSet.length; j++) {
         if (arr[k] === charSet[j]) {
           let position = j + index;
+
           if (position >= charSet.length) {
             position = position - charSet.length;
+
             let shifter = hashMap.get(position);
             result.push(shifter);
             position = j + index;
@@ -97,6 +122,17 @@ function CesarCipher() {
         }
       }
     }
+    for (const key of punctuation) {
+      result.splice(key[1], 0, key[0]);
+    }
+
+    for (const key of upperCase) {
+      let make = result[key[0]];
+      if (make !== undefined) {
+        result.splice(key[0], 1, make.toUpperCase());
+      }
+    }
+
     return result.join("");
   }
 
