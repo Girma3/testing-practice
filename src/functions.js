@@ -85,8 +85,8 @@ function CesarCipher() {
       for (let j = 0; j < charSet.length; j++) {
         if (arr[k] === charSet[j]) {
           let position = j + index;
-          if (position > charSet.length) {
-            position = -1 + index;
+          if (position >= charSet.length) {
+            position = position - charSet.length;
             let shifter = hashMap.get(position);
             result.push(shifter);
             position = j + index;
