@@ -166,5 +166,23 @@ function CesarCipher() {
     encrypt,
   };
 }
+//function that accept array return min, max average, and length
+function analyzeArray(array) {
+  let sortArray = array.sort((a, b) => a - b);
+  let min = sortArray[0];
+  let max = sortArray[sortArray.length - 1];
+  let length = sortArray.length;
+  let initialValue = 0;
+  let sum = sortArray.reduce((total, num) => total + num, initialValue);
+  let average = sum / length;
+  return { min, max, length, average };
+}
 
-export { sum, capitalize, reverseString, Calculator, CesarCipher };
+export {
+  sum,
+  capitalize,
+  reverseString,
+  Calculator,
+  CesarCipher,
+  analyzeArray,
+};
