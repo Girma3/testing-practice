@@ -115,21 +115,25 @@ function CesarCipher() {
     }
     return result;
   }
-
+  //function that return modulo for index divided by alphabet length
+  function fixIndex(index) {
+    return index % charSet.length;
+  }
   function encrypt(str, index) {
     let capitalLetters = getCapitalLetters(str);
     let punctuation = getPunctuation(str);
     let stringArray = onlyLetters(str);
     let result = [];
+    if (index > charSet.length) {
+      index = fixIndex(index);
+    }
 
     for (let k = 0; k < stringArray.length; k++) {
       for (let j = 0; j < charSet.length; j++) {
         if (stringArray[k] === charSet[j]) {
           let position = j + index;
-
           if (position >= charSet.length) {
             position = position - charSet.length;
-
             let shifter = hashMap.get(position);
             result.push(shifter);
             position = j + index;
@@ -141,13 +145,14 @@ function CesarCipher() {
       }
     }
 
-    //function that restore punctuation and upper case letter to encrypted string based on orignal string array
+    //function that restore punctuation and upper case letter to encrypted string based on original string array
     function restorePunctuation(stringArray) {
       for (const key of punctuation) {
-        //key[0] is punctuation , key[1] is index
+        //key[0] is punctuation , key[1] is index, add punctuation
         stringArray.splice(key[1], 0, key[0]);
       }
       for (const key of capitalLetters) {
+        //replace the lower case letter with upper case
         let letter = stringArray[key[0]];
         stringArray.splice(key[0], 1, letter.toUpperCase());
       }
