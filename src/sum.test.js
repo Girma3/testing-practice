@@ -1,4 +1,9 @@
-import { capitalize, sum, reverseString, Calculator } from "./functions";
+import {
+  capitalize,
+  reverseString,
+  Calculator,
+  CesarCipher,
+} from "./functions";
 test("accept string only", () => {
   expect(capitalize(123)).toBeNull();
 });
@@ -26,7 +31,6 @@ test("check the input is number only", () => {
   expect(Calculator().subtract(4, "1")).toBe("invalid input");
   expect(Calculator().divide("123", "5")).toBe("invalid input");
   expect(Calculator().multiply("4", 0)).toBe("invalid input");
-  expect(Calculator().divide(0, 2)).toBe("0 can't be numerator");
 });
 test("check result for addition method", () => {
   expect(Calculator().add(3, 6)).toEqual(9);
@@ -35,13 +39,30 @@ test("check result for addition method", () => {
 
 test("check result for subtract method", () => {
   expect(Calculator().subtract(8, 6)).toEqual(2);
-  expect(Calculator().subtract(3, -8)).toEqual(-5);
+  expect(Calculator().subtract(-3, 2)).toEqual(-5);
 });
 test("check result for multiplication method", () => {
   expect(Calculator().multiply(4, 5)).toEqual(20);
   expect(Calculator().multiply(4, -3)).toEqual(-12);
 });
 test("check result for division method", () => {
+  expect(Calculator().divide(0, 2)).toBe("0 can't be numerator");
   expect(Calculator().divide(15, 3)).toEqual(5);
   expect(Calculator().divide(-15, 3)).toEqual(-5);
+});
+//test for cesarCipher object
+//test for input to be string,check for if the string hold dame char,check for punctuation, check result for encrypt and decrypt
+test("check return  value", () => {
+  expect(CesarCipher().encrypt("xyz", 3)).toEqual("abc");
+  expect(CesarCipher().encrypt("vbz", 2)).toBe("xdb");
+  expect(CesarCipher().encrypt("aabc", 2)).toEqual("ccde");
+  expect(CesarCipher().encrypt("Hello, World!", 3)).toEqual("Khoor, Zruog!");
+  expect(CesarCipher().encrypt("HeLLo", 3)).toEqual("KhOOr");
+});
+//test for arrayAnalyzer that return object of min,max,average and length for an array
+test("check the return value", () => {
+  expect(analyzeArray([1, 8, 3, 4, 2, 6]).length()).toEqual(6);
+  expect(analyzeArray([1, 8, 3, 4, 2, 6]).min()).toEqual(1);
+  expect(analyzeArray([1, 8, 3, 4, 2, 6]).max()).toEqual(8);
+  expect(analyzeArray([1, 8, 3, 4, 2, 6]).average()).toEqual(4);
 });
